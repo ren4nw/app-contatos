@@ -11,10 +11,6 @@ function Home() {
 
   const isFocused = useIsFocused();
 
-  const handlePress = () => {
-    navigation.navigate('CreateContact');
-  };
-
   const getDados = async () => {
     try {
       const dados = await AsyncStorage.getItem('contatos');
@@ -45,10 +41,6 @@ function Home() {
           </View>
         )}
       />
-
-      <TouchableOpacity onPress={handlePress}>
-        <UIText>Criar contato</UIText>
-      </TouchableOpacity>
     </View>
   );
 }

@@ -6,14 +6,13 @@ function UIButton({ onPress, children }) {
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <UIText>{children}</UIText>
+      {children}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
     padding: 8,
     alignItems: 'center',
   },

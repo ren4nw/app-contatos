@@ -52,7 +52,9 @@ function CreateContact() {
         />
       </View>
       <View>
-        <UIButton onPress={salvarContato}>Salvar</UIButton>
+        <UIButton onPress={salvarContato}>
+          <UIText>Salvar</UIText>
+        </UIButton>
       </View>
     </View>
   );
