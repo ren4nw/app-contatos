@@ -15,7 +15,7 @@ function CreateContact() {
   const salvarContato = async () => {
     try {
       let contatos = await AsyncStorage.getItem('contatos');
-      contatos = JSON.parse(contatos);
+      contatos = !contatos ? [] : JSON.parse(contatos);
 
       contatos.push({
         nome,
