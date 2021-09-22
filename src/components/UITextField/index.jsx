@@ -17,14 +17,16 @@ function UITextField({ value, changeText, keyboardType = 'default', placeholder 
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 8,
+    marginVertical: 8,
   },
   input: {
-    borderWidth: 1,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 8,
     paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingVertical: 12,
     fontFamily: 'Roboto',
-    fontSize: 18,
+    fontSize: 20,
+    color: '#333',
   },
 })
 

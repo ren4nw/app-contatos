@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { v4 as uuidv4 } from 'uuid';
 import UIText from '../../components/Text';
 import UIButton from '../../components/UIButton';
 import UITextField from '../../components/UITextField';
@@ -13,11 +14,17 @@ function CreateContact() {
   const navigation = useNavigation();
 
   const salvarContato = async () => {
+    if (!nome || !numero) {
+      Alert.alert('Erro', 'Preencha todos os campos!');
+      return;
+    }
+
     try {
       let contatos = await AsyncStorage.getItem('contatos');
-      contatos = JSON.parse(contatos);
+      contatos = !contatos ? [] : JSON.parse(contatos);
 
       contatos.push({
+        id: uuidv4(),
         nome,
         numero,
       });
@@ -38,7 +45,7 @@ function CreateContact() {
   return (
     <View style={styles.container}>
       <View style={styles.form}>
-        <UIText>Criar contato</UIText>
+        <UIText style={styles.text}>Criar contato</UIText>
         <UITextField
           value={nome}
           changeText={setNome}
@@ -51,11 +58,9 @@ function CreateContact() {
           placeholder="Número"
         />
       </View>
-      <View>
-        <UIButton onPress={salvarContato}>
-          <UIText>Salvar</UIText>
-        </UIButton>
-      </View>
+      <UIButton onPress={salvarContato} color="#3e5af0" >
+        <UIText color="#fff">Salvar</UIText>
+      </UIButton>
     </View>
   );
 }
@@ -64,6 +69,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 14,
+  },
+  text: {
+    fontSize: 23,
+    color: '#333',
   },
   form: {
     flex: 1,

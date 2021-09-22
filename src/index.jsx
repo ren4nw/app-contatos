@@ -9,6 +9,7 @@ import UIText from './components/Text';
 import UIHeader from './components/UIHeader';
 import UIButton from './components/UIButton';
 import { MaterialIcons } from '@expo/vector-icons';
+import 'react-native-get-random-values';
 
 const Stack = createNativeStackNavigator();
 

@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Alert, FlatList } from 'react-nativ
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import UIText from '../../components/Text';
+import ContactCard from '../../components/ContactCard';
 
 function Home() {
   const [contatos, setContatos] = useState([]);
@@ -33,13 +34,8 @@ function Home() {
     <View>
       <FlatList
         data={contatos}
-        keyExtractor={item => item.numero}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <UIText>{item.nome}</UIText>
-            <UIText>{item.numero}</UIText>
-          </View>
-        )}
+        keyExtractor={item => item.id || item.numero}
+        renderItem={({ item }) => <ContactCard contato={item} />}
       />
     </View>
   );
