@@ -1,28 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Alert, FlatList } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect } from 'react';
+import { View, FlatList } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import UIText from '../../components/UIText';
 import ContactCard from '../../components/ContactCard';
+import { useAppContext } from '../../contexts/app-context';
 
 function Home() {
-  const [contatos, setContatos] = useState([]);
+  const { atualizarContatos, contatos } = useAppContext();
 
   const navigation = useNavigation();
 
   const isFocused = useIsFocused();
-
-  const getDados = async () => {
-    try {
-      const dados = await AsyncStorage.getItem('contatos');
-
-      setContatos(JSON.parse(dados));
-    } catch (e) {
-      console.log(e);
-
-      Alert.alert('Erro', 'Erro ao buscar contatos');
-    }
-  };
 
   const contatoSelecionado = (numero) => () => {
     navigation.navigate('CreateContact', { editar: true, numero });
@@ -30,7 +17,7 @@ function Home() {
 
   useEffect(() => {
     if (isFocused) {
-      getDados();
+      atualizarContatos();
     }
   }, [isFocused]);
 
@@ -50,15 +37,5 @@ function Home() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontFamily: 'Roboto',
-    fontSize: 22,
-  },
-  item: {
-    borderBottomWidth: 1,
-  }
-})
 
 export default Home;

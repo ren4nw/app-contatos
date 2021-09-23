@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { v4 as uuidv4 } from 'uuid';
 import UIText from '../../components/UIText';
 import UIButton from '../../components/UIButton';
 import UITextField from '../../components/UITextField';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useAppContext } from '../../contexts/app-context';
 
 function CreateContact() {
   const [nome, setNome] = useState('');
   const [numero, setNumero] = useState('');
+
+  const { buscarContato, adicionarContato, atualizarContato, deletarContato } = useAppContext();
 
   const navigation = useNavigation();
 
@@ -23,16 +25,11 @@ function CreateContact() {
     }
 
     try {
-      let contatos = await AsyncStorage.getItem('contatos');
-      contatos = !contatos ? [] : JSON.parse(contatos);
-
-      contatos.push({
+      adicionarContato({
         id: uuidv4(),
         nome,
         numero,
       });
-
-      await AsyncStorage.setItem('contatos', JSON.stringify(contatos));
 
       navigation.navigate('Home');
 
@@ -44,39 +41,20 @@ function CreateContact() {
   };
 
   const editarContato = async () => {
-    let contatos = await AsyncStorage.getItem('contatos');
-    contatos = !contatos ? [] : JSON.parse(contatos);
-
-    const contatoIndex = contatos.findIndex(item => item.numero === params?.numero);
-
-    contatos.splice(contatoIndex, 1, { nome, numero });
-
-    await AsyncStorage.setItem('contatos', JSON.stringify(contatos));
+    atualizarContato(params?.numero, { nome, numero });
 
     navigation.navigate('Home');
   };
 
   const excluirContato = async () => {
-    let contatos = await AsyncStorage.getItem('contatos');
-    contatos = !contatos ? [] : JSON.parse(contatos);
-
-    const contatoIndex = contatos.findIndex(item => item.numero === params?.numero);
-
-    contatos.splice(contatoIndex, 1);
-
-    await AsyncStorage.setItem('contatos', JSON.stringify(contatos));
+    deletarContato(params?.numero);
 
     navigation.navigate('Home');
   };
 
   const preencherCampos = async () => {
-    console.log('preencher');
-
     try {
-      let contatos = await AsyncStorage.getItem('contatos');
-      contatos = !contatos ? [] : JSON.parse(contatos);
-
-      const contatoSelecionado = contatos.find(item => item.numero === params.numero);
+      const contatoSelecionado = buscarContato(params?.numero);
       
       if (!contatoSelecionado) {
         Alert.alert('Erro', 'Contato não encontrado');
