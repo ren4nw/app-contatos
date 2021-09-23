@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import ContactCard from '../../components/ContactCard';
-import { AppContext } from '../../contexts/appContext';
+import { useAppContext } from '../../contexts/appContext';
 
 function Home() {
-  const { atualizarContatos, contatos } = useContext(AppContext);
+  const { atualizarContatos, contatos } = useAppContext();
 
   const navigation = useNavigation();
 

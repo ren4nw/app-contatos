@@ -1,19 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { v4 as uuidv4 } from 'uuid';
 import UIText from '../../components/Text';
 import UIButton from '../../components/UIButton';
 import UITextField from '../../components/UITextField';
 import { MaterialIcons } from '@expo/vector-icons';
-import { AppContext } from '../../contexts/appContext';
+import { useAppContext } from '../../contexts/appContext';
 
 function CreateContact() {
   const [nome, setNome] = useState('');
   const [numero, setNumero] = useState('');
 
-  const { buscarContato, criarContato, atualizarContato, deletarContato } = useContext(AppContext);
+  const { buscarContato, criarContato, atualizarContato, deletarContato } = useAppContext();
 
   const navigation = useNavigation();
 

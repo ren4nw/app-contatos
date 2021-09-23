@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
@@ -64,5 +64,9 @@ export default function AppProvider({ children }) {
       {children}
     </AppContext.Provider>
   )
+}
+
+export function useAppContext() {
+  return useContext(AppContext);
 }
 
