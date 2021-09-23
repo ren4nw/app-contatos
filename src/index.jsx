@@ -10,6 +10,7 @@ import UIHeader from './components/UIHeader';
 import UIButton from './components/UIButton';
 import { MaterialIcons } from '@expo/vector-icons';
 import 'react-native-get-random-values';
+import AppProvider from './contexts/appContext';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,30 +34,32 @@ function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        header: (headerInfo) => <UIHeader headerInfo={headerInfo} />
-      }}>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            header: headerInfo => (
-              <UIHeader
-                headerInfo={headerInfo}
-                rightButton={navigate => (
-                  <UIButton onPress={() => navigate('CreateContact')}>
-                    <MaterialIcons name="add" style={{ color: '#fff', fontSize: 23 }} />
-                  </UIButton>
-                )}
-              />
-            ),
-            title: 'Lista de contatos',
-          }}
-        />
-        <Stack.Screen name="CreateContact" component={CreateContact} options={{ title: 'Criar contato' }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{
+          header: (headerInfo) => <UIHeader headerInfo={headerInfo} />
+        }}>
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              header: headerInfo => (
+                <UIHeader
+                  headerInfo={headerInfo}
+                  rightButton={navigate => (
+                    <UIButton onPress={() => navigate('CreateContact')}>
+                      <MaterialIcons name="add" style={{ color: '#fff', fontSize: 23 }} />
+                    </UIButton>
+                  )}
+                />
+              ),
+              title: 'Lista de contatos',
+            }}
+          />
+          <Stack.Screen name="CreateContact" component={CreateContact} options={{ title: 'Criar contato' }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
 }
 

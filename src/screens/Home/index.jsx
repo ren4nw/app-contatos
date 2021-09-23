@@ -1,32 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Alert, FlatList } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext, useEffect } from 'react';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import UIText from '../../components/Text';
 import ContactCard from '../../components/ContactCard';
+import { AppContext } from '../../contexts/appContext';
 
 function Home() {
-  const [contatos, setContatos] = useState([]);
+  const { atualizarContatos, contatos } = useContext(AppContext);
 
   const navigation = useNavigation();
 
   const isFocused = useIsFocused();
 
-  const getDados = async () => {
-    try {
-      const dados = await AsyncStorage.getItem('contatos');
-
-      setContatos(JSON.parse(dados));
-    } catch (e) {
-      console.log(e);
-
-      Alert.alert('Erro', 'Erro ao buscar contatos');
-    }
+  const contatoSelecionado = numero => () => {
+    navigation.navigate('CreateContact', { editar: true, numero });
   };
 
   useEffect(() => {
     if (isFocused) {
-      getDados();
+      atualizarContatos();
     }
   }, [isFocused]);
 
@@ -35,7 +26,7 @@ function Home() {
       <FlatList
         data={contatos}
         keyExtractor={item => item.id || item.numero}
-        renderItem={({ item }) => <ContactCard contato={item} />}
+        renderItem={({ item }) => <ContactCard contatoSelecionado={contatoSelecionado(item.numero)} contato={item} />}
       />
     </View>
   );
