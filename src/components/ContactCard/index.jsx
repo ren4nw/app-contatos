@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import UIText from '../Text';
+import UIText from '../UIText';
 
-function ContactCard({ contato }) {
+function ContactCard({ contatoSelecionado, contato }) {
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={contatoSelecionado}>
       <View>
         <MaterialIcons name="person" style={styles.icon} />
       </View>

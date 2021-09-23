@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home';
 import CreateContact from './screens/CreateContact';
-import UIText from './components/Text';
+import UIText from './components/UIText';
 import UIHeader from './components/UIHeader';
 import UIButton from './components/UIButton';
 import { MaterialIcons } from '@expo/vector-icons';

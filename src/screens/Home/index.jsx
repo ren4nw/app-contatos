@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import UIText from '../../components/Text';
+import UIText from '../../components/UIText';
 import ContactCard from '../../components/ContactCard';
 
 function Home() {
@@ -24,6 +24,10 @@ function Home() {
     }
   };
 
+  const contatoSelecionado = (numero) => () => {
+    navigation.navigate('CreateContact', { editar: true, numero });
+  };
+
   useEffect(() => {
     if (isFocused) {
       getDados();
@@ -35,7 +39,13 @@ function Home() {
       <FlatList
         data={contatos}
         keyExtractor={item => item.id || item.numero}
-        renderItem={({ item }) => <ContactCard contato={item} />}
+        renderItem={({ item }) => (
+          <ContactCard
+            editar
+            contatoSelecionado={contatoSelecionado(item.numero)}
+            contato={item}
+          />
+        )}
       />
     </View>
   );

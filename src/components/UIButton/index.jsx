@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import UIText from '../Text';
 
-function UIButton({ color = 'transparent', onPress, children }) {
+function UIButton({ color = 'transparent', style = {}, onPress, children }) {
 
   return (
-    <TouchableOpacity style={[styles.container, { backgroundColor: color }]} onPress={onPress}>
+    <TouchableOpacity style={[styles.container, { backgroundColor: color }, style]} onPress={onPress}>
       {children}
     </TouchableOpacity>
   );

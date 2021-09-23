@@ -20,8 +20,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   input: {
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 8,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: 8,
     paddingVertical: 12,
     fontFamily: 'Roboto',

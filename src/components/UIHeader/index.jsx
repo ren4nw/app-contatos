@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import UIText from '../Text';
+import UIText from '../UIText';
 
 function UIHeader({ headerInfo, rightButton = null }) {
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 23,
     color: '#fff',
-    marginRight: 8,
+    marginRight: 12,
   },
 });
 
