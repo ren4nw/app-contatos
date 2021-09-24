@@ -1,45 +1,23 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
-import ContactCard from '../../components/ContactCard';
-import { useAppContext } from '../../contexts/appContext';
+import React from 'react';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import TodosContatos from '../Tabs/TodosContatos';
+import Favoritos from '../Tabs/Favoritos';
+
+const Tab = createMaterialTopTabNavigator();
 
 function Home() {
-  const { atualizarContatos, contatos } = useAppContext();
-
-  const navigation = useNavigation();
-
-  const isFocused = useIsFocused();
-
-  const contatoSelecionado = numero => () => {
-    navigation.navigate('CreateContact', { editar: true, numero });
-  };
-
-  useEffect(() => {
-    if (isFocused) {
-      atualizarContatos();
-    }
-  }, [isFocused]);
-
   return (
-    <View>
-      <FlatList
-        data={contatos}
-        keyExtractor={item => item.id || item.numero}
-        renderItem={({ item }) => <ContactCard contatoSelecionado={contatoSelecionado(item.numero)} contato={item} />}
-      />
-    </View>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarLabelStyle: { color: '#fff' },
+        tabBarIndicatorStyle: { backgroundColor: '#fff' },
+        tabBarStyle: { backgroundColor: '#273eb0' },
+      }}
+    >
+      <Tab.Screen name="Todos" component={TodosContatos} />
+      <Tab.Screen name="Favoritos" component={Favoritos} />
+    </Tab.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontFamily: 'Roboto',
-    fontSize: 22,
-  },
-  item: {
-    borderBottomWidth: 1,
-  }
-})
 
 export default Home;

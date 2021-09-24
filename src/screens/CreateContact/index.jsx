@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Switch, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { v4 as uuidv4 } from 'uuid';
 import UIText from '../../components/Text';
@@ -11,6 +11,7 @@ import { useAppContext } from '../../contexts/appContext';
 function CreateContact() {
   const [nome, setNome] = useState('');
   const [numero, setNumero] = useState('');
+  const [favorito, setFavorito] = useState(false);
 
   const { buscarContato, criarContato, atualizarContato, deletarContato } = useAppContext();
 
@@ -25,9 +26,7 @@ function CreateContact() {
     }
 
     try {
-      criarContato({ id: uuidv4(), nome, numero });
-
-      Alert.alert('Sucesso', 'Dados salvo com sucesso!');
+      criarContato({ id: uuidv4(), nome, numero, favorito });
 
       navigation.navigate('Home');
 
@@ -51,10 +50,11 @@ function CreateContact() {
 
     setNome(contatoSelecionado?.nome);
     setNumero(contatoSelecionado?.numero);
+    setFavorito(contatoSelecionado?.favorito);
   };
 
   const editarContato = async () => {
-    atualizarContato(params?.numero, { nome, numero });
+    atualizarContato(params?.numero, { nome, numero, favorito });
 
     navigation.navigate('Home');
   };
@@ -89,6 +89,10 @@ function CreateContact() {
             keyboardType="numeric"
             placeholder="Número"
           />
+          <View style={styles.switchContainer}>
+            <UIText style={styles.label}>Contato favorito</UIText>
+            <Switch onValueChange={() => setFavorito(!favorito)} value={favorito} />
+          </View>
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
@@ -116,13 +120,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  text: {
-    fontSize: 23,
-    color: '#333',
-  },
   form: {
     flex: 1,
     padding: 14,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 4,
+    marginTop: 8,
+  },
+  label: {
+    fontSize: 20,
+    color: '#333'
   },
   buttonContainer: {
     padding: 14,

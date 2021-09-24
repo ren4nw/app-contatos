@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
   },
   nome: {
-    fontSize: 23,
+    fontSize: 21,
     fontWeight: 'bold',
   },
   numero: {

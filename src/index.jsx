@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { registerRootComponent } from 'expo';
 import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home';
@@ -30,7 +31,7 @@ function App() {
   }, []);
 
   if (!ready) {
-    return <UIText>Carregando...</UIText>;
+    return <AppLoading />;
   }
 
   return (
