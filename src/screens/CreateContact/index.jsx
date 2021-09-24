@@ -96,9 +96,11 @@ function CreateContact() {
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <UIButton style={{ marginBottom: 8 }} onPress={excluirContato} color="#eb1e36">
-          <UIText color="#fff">Excluir</UIText>
-        </UIButton>
+        {params?.editar && (
+          <UIButton style={{ marginBottom: 8 }} onPress={excluirContato} color="#eb1e36">
+            <UIText color="#fff">Excluir</UIText>
+          </UIButton>
+        )}
         <UIButton onPress={params?.editar ? editarContato : salvarContato} color="#3e5af0">
           <UIText color="#fff">Salvar</UIText>
         </UIButton>
