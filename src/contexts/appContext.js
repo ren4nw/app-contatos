@@ -37,7 +37,7 @@ export default function AppProvider({ children }) {
   const atualizarContato = async (numero, contato) => {
     const contatoIndex = contatos.findIndex(item => item.numero === numero);
 
-    contatos.splice(contatoIndex, 1, { nome: contato.nome, numero: contato.numero });
+    contatos.splice(contatoIndex, 1, contato);
 
     modificarContatos(contatos);
   };

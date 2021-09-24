@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { registerRootComponent } from 'expo';
 import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home';
 import CreateContact from './screens/CreateContact';
-import UIText from './components/Text';
 import UIHeader from './components/UIHeader';
 import UIButton from './components/UIButton';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   if (!ready) {
-    return <UIText>Carregando...</UIText>;
+    return <AppLoading />;
   }
 
   return (
