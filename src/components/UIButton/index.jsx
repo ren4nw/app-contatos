@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import UIText from '../Text';
 
 function UIButton({ style = {}, color = 'transparent', onPress, children }) {
 

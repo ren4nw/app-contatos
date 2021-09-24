@@ -4,14 +4,13 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MaterialIcons } from '@expo/vector-icons';
 import Home from './screens/Home';
 import CreateContact from './screens/CreateContact';
-import UIText from './components/Text';
 import UIHeader from './components/UIHeader';
 import UIButton from './components/UIButton';
-import { MaterialIcons } from '@expo/vector-icons';
-import 'react-native-get-random-values';
 import AppProvider from './contexts/appContext';
+import 'react-native-get-random-values';
 
 const Stack = createNativeStackNavigator();
 
